@@ -4,9 +4,9 @@
   become_user: root
   tasks:
   - name: Check if chromedriver exists
-      stat:
-        path: ./chromedriver
-        register: isChromeDriverPresent
+    stat:
+      path: ./chromedriver
+    register: isChromeDriverPresent
   - debug:
       msg: "Chromedriver exists, so we skip  the chromedriver installation..."
     when: isChromeDriverPresent.stat.exists
