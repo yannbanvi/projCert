@@ -8,7 +8,7 @@
           path: ./chromedriver
         register: isChromeDriverPresent
   - debug:
-      msg: "Chromedriver exists, so we skip the next the chromedriver installation..."
+      msg: "Chromedriver exists, so we skip  the chromedriver installation..."
     when: isChromeDriverPresent.stat.exists
   - name: Install ChromeDriver
     shell: |
@@ -20,9 +20,9 @@
       apt-get -y install google-chrome-stable
       wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
       unzip chromedriver_linux64.zip
-    when: isChromeDriverPresent.stat.exists == False
+    when: not isChromeDriverPresent.stat.exists
   - name: Install Chromium Browser
     package:
      name: chromium-browser
      state: present
-     when: isChromeDriverPresent.stat.exists == False
+     when: not isChromeDriverPresent.stat.exists
