@@ -25,4 +25,4 @@
     package:
      name: chromium-browser
      state: present
-     when: not isChromeDriverPresent.stat.exists
+    when: not isChromeDriverPresent.stat.exists
