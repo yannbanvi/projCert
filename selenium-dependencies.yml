@@ -22,6 +22,10 @@
       unzip chromedriver_linux64.zip
     when: not isChromeDriverPresent.stat.exists
   - name: Install Chromium Browser
+    shell: |
+      apt-get clean 
+      apt-get update
+    when: not isChromeDriverPresent.stat.exists
     package:
      name: chromium-browser
      state: present
