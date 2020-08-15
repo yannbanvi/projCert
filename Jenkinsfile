@@ -4,7 +4,7 @@ pipeline {
     options {
         skipDefaultCheckout(true)
     }
- 
+    
     stages {
         stage('Checkout SCM') {
             steps {
@@ -12,12 +12,14 @@ pipeline {
                 checkout scm
             }
         }
+        
         stage('Installing root dependencies') {
             steps {
                 echo '> Running the install_dependencies job'
                 build 'install_dependencies'
             }
         }
+        
         stage('Installing Docker and Deploying the PHP app') {
             steps {
                 echo '> Running the deploy app to test server job'
