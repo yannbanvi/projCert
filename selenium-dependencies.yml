@@ -3,6 +3,13 @@
   become: yes
   become_user: root
   tasks:
+  - name: Check if chromedriver exists
+        stat:
+          path: ./chromedriver
+        register: isChromeDriverPresent
+  - debug:
+      msg: "Chromedriver exists, so we skip the next the chromedriver installation..."
+    when: isChromeDriverPresent.stat.exists
   - name: Install ChromeDriver
     shell: |
       apt-get update
@@ -13,7 +20,9 @@
       apt-get -y install google-chrome-stable
       wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
       unzip chromedriver_linux64.zip
+    when: isChromeDriverPresent.stat.exists == False
   - name: Install Chromium Browser
     package:
      name: chromium-browser
      state: present
+     when: isChromeDriverPresent.stat.exists == False
