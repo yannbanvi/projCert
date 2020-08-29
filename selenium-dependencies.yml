@@ -20,6 +20,7 @@
       apt-get -y install google-chrome-stable
       wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
       unzip chromedriver_linux64.zip
+      chmod -R 777 chromedriver
     when: not isChromeDriverPresent.stat.exists
   - name: Install Chromium Browser
     package:
